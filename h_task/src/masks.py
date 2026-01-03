@@ -9,8 +9,13 @@ def get_mask_card_number(card_number: int | str) -> str:
     7000792289606361     # входной аргумент
     7000 79** **** 6361  # выход функции"""
 
+    mask_card_number = ""
     number_str = str(card_number)
-    mask_card_number = number_str[:4] + " " + number_str[4:6] + "** **** " + number_str[-4:]
+
+    if len(number_str) == 16:
+        mask_card_number = number_str[:4] + " " + number_str[4:6] + "** **** " + number_str[-4:]
+    else:
+        print("Номер карты должен содержать 16 цифр!")
     return mask_card_number
 
 
@@ -23,6 +28,11 @@ def get_mask_account(account_number: int | str) -> str:
     73654108430135874305  # входной аргумент
     **4305  # выход функции"""
 
+    mask_account = ""
     account_str = str(account_number)
-    mask_account = "**" + account_str[-4:]
+
+    if len(account_str) == 20:
+        mask_account = "**" + account_str[-4:]
+    else:
+        print("Номер счета должен содержать 20 цифр!")
     return mask_account
