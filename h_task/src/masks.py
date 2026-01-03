@@ -12,10 +12,11 @@ def get_mask_card_number(card_number: int | str) -> str:
     mask_card_number = ""
     number_str = str(card_number)
 
-    if len(number_str) == 16:
+    if len(number_str) == 16 and number_str.isdigit():
         mask_card_number = number_str[:4] + " " + number_str[4:6] + "** **** " + number_str[-4:]
     else:
-        print("Номер карты должен содержать 16 цифр!")
+        print("Номер карты должен содержать 16 цифр без пробелов!")
+
     return mask_card_number
 
 
@@ -31,8 +32,9 @@ def get_mask_account(account_number: int | str) -> str:
     mask_account = ""
     account_str = str(account_number)
 
-    if len(account_str) == 20:
+    if len(account_str) == 20 and account_str.isdigit():
         mask_account = "**" + account_str[-4:]
     else:
-        print("Номер счета должен содержать 20 цифр!")
+        print("Номер счета должен содержать 20 цифр без пробелов!")
+
     return mask_account
