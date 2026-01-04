@@ -6,14 +6,15 @@ def ask_account_card(account_card_str: str = "") -> str:
     или счета, а возвращает строку с замаскированным номером."""
 
     account_card_mask = ""
+    arg_str = account_card_str.strip()
 
-    if account_card_str:
-        if "счет" in account_card_str.lower():
-            account_index = len(account_card_str) - len(account_card_str[-20:])
-            account_card_mask = account_card_str[:account_index] + get_mask_account(account_card_str[account_index:])
+    if arg_str:
+        if "счет" in arg_str.lower():
+            account_index = len(arg_str) - 20
+            account_card_mask = arg_str[:account_index] + get_mask_account(arg_str[account_index:])
         else:
-            card_index = len(account_card_str) - len(account_card_str[-16:])
-            account_card_mask = account_card_str[:card_index] + get_mask_card_number(account_card_str[card_index:])
+            card_index = len(arg_str) - 16
+            account_card_mask = arg_str[:card_index] + get_mask_card_number(arg_str[card_index:])
     else:
         print("Значение карты или счета не должно быть пустым")
 
