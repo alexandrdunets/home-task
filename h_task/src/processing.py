@@ -11,3 +11,8 @@ def filter_by_state(list_dict=None, state: str = "EXECUTED") -> list[dict]:
     return list_res_dict
 
 
+def sort_by_date(list_dict=None, ascending: bool = False) -> list[dict]:
+    """Функция возвращает новый список, отсортированный по дате (date). На вход принимаются список словарей и
+        булевский параметр ascending (True -сортировка по возрастанию, по умолчанию сортировка производится по убыванию)"""
+    sorted_list = sorted(list_dict, key=lambda dictionary: dictionary.get("data", 0), reverse=ascending)
+    return sorted_list
