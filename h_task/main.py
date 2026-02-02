@@ -4,7 +4,7 @@ from src.widget import ask_account_card, get_date
 def main():
     """Проверка работы функций"""
 
-    print(ask_account_card("     Maestro 1596837868705199   "))
+    print(ask_account_card("Maestro 1596837868705199"))
     print(ask_account_card("Счет 64686473678894779589"))
     print(ask_account_card("MasterCard 7158300734726758"))
     print(ask_account_card("Счет 35383033474447895560"))
