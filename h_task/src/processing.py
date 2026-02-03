@@ -3,8 +3,8 @@ from typing import Optional
 
 def filter_by_state(list_dict: Optional[list[dict]] = None, state: str = "EXECUTED") -> list[dict]:
     """Функция принимает список словарей и опционально значение для ключа state (по умолчанию 'EXECUTED'),
-       а возвращает новый список словарей, содержащий только те словари, у которых ключ state
-       соответствует указанному значению."""
+    а возвращает новый список словарей, содержащий только те словари, у которых ключ state
+    соответствует указанному значению."""
     list_res_dict = []
     if list_dict:
         for dictionary in list_dict:
@@ -13,16 +13,18 @@ def filter_by_state(list_dict: Optional[list[dict]] = None, state: str = "EXECUT
                 list_res_dict.append(dictionary)
     else:
         print("Отсутствует параметр 'list_dict'")
+
     return list_res_dict
 
 
 def sort_by_date(list_dict: Optional[list[dict]] = None, descending: bool = True) -> list[dict]:
     """Функция возвращает новый список, отсортированный по дате (date). На вход принимаются список словарей и
-        булевский параметр descending (False -сортировка по возрастанию,
-        True (по умолчанию)- сортировка производится по убыванию)"""
+    булевский параметр descending (False -сортировка по возрастанию,
+    True (по умолчанию)- сортировка производится по убыванию)"""
     sorted_list = []
     if list_dict:
         sorted_list = sorted(list_dict, key=lambda dictionary: dictionary.get("date", 0), reverse=descending)
     else:
         print("Отсутствует параметр 'list_dict'")
+
     return sorted_list
