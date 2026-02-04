@@ -2,8 +2,9 @@
 from src.processing import filter_by_state, sort_by_date
 
 
-def main() -> None:
-    """Проверка работы функций"""
+if __name__ == "__main__":
+
+    # Проверка работы функций
 
     # print(ask_account_card("Maestro 1596837868705199"))
     # print(ask_account_card("Счет 64686473678894779589"))
@@ -40,7 +41,3 @@ def main() -> None:
                         {'id': 594226727, 'state': 'CANCELED', 'date': '2018-09-12T21:27:25.241689'},
                         {'id': 615064591, 'state': 'CANCELED', 'date': '2018-10-14T08:21:33.419441'}],
                        is_descending=False))
-
-
-if __name__ == "__main__":
-    main()
