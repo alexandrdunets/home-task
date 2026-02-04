@@ -17,13 +17,13 @@ def filter_by_state(list_dict: Optional[list[dict]] = None, state: str = "EXECUT
     return list_res_dict
 
 
-def sort_by_date(list_dict: Optional[list[dict]] = None, descending: bool = True) -> list[dict]:
+def sort_by_date(list_dict: Optional[list[dict]] = None, is_descending: bool = True) -> list[dict]:
     """Функция возвращает новый список, отсортированный по дате (date). На вход принимаются список словарей и
-    булевский параметр descending (False -сортировка по возрастанию,
+    булевский параметр descending_is (False -сортировка по возрастанию,
     True (по умолчанию)- сортировка производится по убыванию)"""
     sorted_list = []
     if list_dict:
-        sorted_list = sorted(list_dict, key=lambda dictionary: dictionary.get("date", 0), reverse=descending)
+        sorted_list = sorted(list_dict, key=lambda dictionary: dictionary.get("date", 0), reverse=is_descending)
     else:
         print("Отсутствует параметр 'list_dict'")
 
