@@ -23,3 +23,24 @@ def account_number_input_list_no_digit() -> list[str]:
         "Счет 73654108430135874305",
         "7365410843O135874305",
     ]
+
+
+@pytest.fixture
+def ask_account_card_list_empty() -> list[str | None]:
+    """Набор входных данных для негативного теста функции ask_account_card()
+      на пустое значение"""
+    return [None, ""]
+
+
+@pytest.fixture
+def account_card_list_invalid_input():
+    """Набор входных данных для негативного теста функции ask_account_card()
+          на несоответствие типа входных данных"""
+    return [1, [1,], (1,), {1,}, {"key": "value"},]
+
+
+@pytest.fixture
+def get_mask_card_account_list_invalid_input():
+    """Набор входных данных для негативного теста функций get_mask_card_number()
+    и get_mask_account() на несоответствие типа входных данных"""
+    return [[1,], (1,), {1,}, {"key": "value"},]

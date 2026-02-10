@@ -29,7 +29,7 @@ def test_get_mask_card_number_no_digit(card_number_input_list_no_digit):
         assert str(exc_info.value) == "Номер карты должен содержать только цифры"
 
 
-def test_get_mask_card_number_is_absent():
+def test_get_mask_card_number_empty():
     """Тест на отсутствие номера карты"""
     with pytest.raises(ValueError) as exc_info:
         get_mask_card_number()
@@ -63,8 +63,26 @@ def test_get_mask_account_no_digit(account_number_input_list_no_digit):
         assert str(exc_info.value) == "Номер счета должен содержать только цифры"
 
 
-def test_get_mask_account_is_absent():
+def test_get_mask_account_empty():
     """Тест на отсутствие номера счета"""
     with pytest.raises(ValueError) as exc_info:
         get_mask_account()
     assert str(exc_info.value) == "Номер счета отсутствует"
+
+
+def test_get_mask_card_number_invalid_input(get_mask_card_account_list_invalid_input):
+    """Тест на несоответствие типа входных данных"""
+    for item in get_mask_card_account_list_invalid_input:
+        with pytest.raises(TypeError) as exc_info:
+            get_mask_card_number(item)
+        assert str(exc_info.value) == "Тип данных входного аргумента должен быть целым или строковым"
+
+
+def test_get_mask_account_invalid_input(get_mask_card_account_list_invalid_input):
+    """Тест на несоответствие типа входных данных"""
+    for item in get_mask_card_account_list_invalid_input:
+        with pytest.raises(TypeError) as exc_info:
+            get_mask_account(item)
+        assert str(exc_info.value) == "Тип данных входного аргумента должен быть целым или строковым"
+
+

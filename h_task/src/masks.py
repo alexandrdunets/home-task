@@ -15,6 +15,9 @@ def get_mask_card_number(card_number: Optional[int | str] = None) -> str:
     if not card_number:
         raise ValueError("Номер карты отсутствует")
 
+    if not isinstance(card_number, int | str):
+        raise TypeError("Тип данных входного аргумента должен быть целым или строковым")
+
     mask_card_number = ""
     number_str = str(card_number)
 
@@ -39,6 +42,9 @@ def get_mask_account(account_number: Optional[int | str] = None) -> str:
 
     if not account_number:
         raise ValueError("Номер счета отсутствует")
+
+    if not isinstance(account_number, int | str):
+        raise TypeError("Тип данных входного аргумента должен быть целым или строковым")
 
     mask_account = ""
     account_str = str(account_number)
