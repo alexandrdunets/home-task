@@ -1,39 +1,63 @@
+from typing import Optional
 from src.masks import get_mask_card_number, get_mask_account
 
 
-def ask_account_card(account_card_str: str = "") -> str:
+def ask_account_card(account_card_str: Optional[str] = None) -> str:
     """Функция принимает один аргумент — строку, содержащую тип и номер карты
     или счета, а возвращает строку с замаскированным номером."""
 
     account_card_mask = ""
 
-    if account_card_str:
-        if "счет" in account_card_str.lower():
-            account_index = len(account_card_str) - len(account_card_str[-20:])
-            account_card_mask = account_card_str[:account_index] + get_mask_account(account_card_str[account_index:])
-        else:
-            card_index = len(account_card_str) - len(account_card_str[-16:])
-            account_card_mask = account_card_str[:card_index] + get_mask_card_number(account_card_str[card_index:])
+    if not account_card_str:
+        raise ValueError("Отсутствуют название и номер карты (счета)")
+
+    if not isinstance(account_card_str, str):
+        raise TypeError("Тип входного аргумента должен быть строковым")
+
+    account_card_list = []
+    account_card_str = account_card_str.strip()
+    account_card_list = account_card_str.split()
+
+    if "счет" in account_card_str.lower():
+
+        account_number = account_card_list.pop()
+        account_card_mask = " ".join(account_card_list) + " " + get_mask_account(account_number)
+
     else:
-        print("Значение карты или счета не должно быть пустым")
+
+        card_number = account_card_list.pop()
+        account_card_mask = " ".join(account_card_list) + " " + get_mask_card_number(card_number)
 
     return account_card_mask
 
 
-def get_date(date_in: str = "") -> str:
-    """Функция get_date(date_in: str) принимает на вход строку с датой в формате "2024-03-11T02:26:18.671407"
-    и возвращает строку с датой в формате "ДД.ММ.ГГГГ" ("11.03.2024")."""
+def get_date(date_in: Optional[str] = None) -> str:
+    """Функция get_date(date_in: str) принимает на вход строку с датой в формате
+    "2024-03-11T02:26:18.671407" и возвращает строку с датой в формате "ДД.ММ.ГГГГ" ("11.03.2024")."""
 
     date_out = ""
-    if date_in:
-        day_dd = date_in[8:10]
-        month_mm = date_in[5:7]
-        year_yyyy = date_in[:4]
-        if day_dd.isdigit() and month_mm.isdigit() and year_yyyy.isdigit():
-            date_out = f"{day_dd}.{month_mm}.{year_yyyy}"
-        else:
-            print("Неправильный формат входных данных!")
-    else:
-        print("Аргумент не должен быть пустым!")
+
+    if not date_in:
+        raise ValueError("Отсутствует значение даты")
+
+    if not isinstance(date_in, str):
+        raise TypeError("Тип входного аргумента должен быть строковым")
+
+    date_in = date_in.strip()
+
+    day_dd = date_in[8:10]
+    month_mm = date_in[5:7]
+    year_yyyy = date_in[:4]
+
+    if not day_dd.isdigit() or not month_mm.isdigit() or not year_yyyy.isdigit():
+        raise ValueError("Нераспознанный формат входных данных!")
+
+    if int(day_dd) not in range(1, 32):
+        raise ValueError("В месяце должно быть от 1 до 31 дня")
+
+    if int(month_mm) not in range(1, 13):
+        raise ValueError("В году должно быть от 1 до 12 месяцев")
+
+    date_out = f"{day_dd}.{month_mm}.{year_yyyy}"
 
     return date_out

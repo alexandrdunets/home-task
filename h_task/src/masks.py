@@ -23,6 +23,7 @@ def get_mask_card_number(card_number: Optional[int | str] = None) -> str:
 
     if not number_str.isdigit():
         raise ValueError("Номер карты должен содержать только цифры")
+
     if len(number_str) != 16:
         raise ValueError("Номер карты должен содержать 16 цифр")
 
