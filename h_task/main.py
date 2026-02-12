@@ -1,5 +1,5 @@
-from src.widget import ask_account_card, get_date
 from src.processing import filter_by_state, sort_by_date
+from src.widget import ask_account_card, get_date
 
 if __name__ == "__main__":
 
@@ -41,6 +41,7 @@ if __name__ == "__main__":
     )
 
     # Сортировка операций по дате (убывание):
+
     print(
         sort_by_date(
             [
@@ -52,6 +53,7 @@ if __name__ == "__main__":
             ]
         )
     )
+
 
     # Сортировка операций по дате (возростание):
     print(

@@ -1,5 +1,6 @@
 import pytest
-from src.masks import get_mask_card_number, get_mask_account
+
+from src.masks import get_mask_account, get_mask_card_number
 
 
 def test_get_mask_card_number():
@@ -84,7 +85,3 @@ def test_get_mask_account_invalid_input(get_mask_card_account_list_invalid_input
         with pytest.raises(TypeError) as exc_info:
             get_mask_account(item)
         assert str(exc_info.value) == "Тип данных входного аргумента должен быть целым или строковым"
-
-
-
-

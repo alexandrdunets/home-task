@@ -1,4 +1,5 @@
 import pytest
+
 from src.widget import ask_account_card, get_date
 
 
@@ -10,11 +11,13 @@ def test_ask_card():
 
 def test_ask_account():
     """Тест для проверки, что функция корректно распознает и применяет нужный тип
-        маскировки для счета"""
+    маскировки для счета"""
     assert ask_account_card("Счет 64686473678894779589") == "Счет **9589"
 
 
-@pytest.mark.parametrize("x, expected", [
+@pytest.mark.parametrize(
+    "x, expected",
+    [
         ("  Maestro 1596837868705199   ", "Maestro 1596 83** **** 5199"),
         (" Счет 64686473678894779589 ", "Счет **9589"),
         ("MasterCard 7158300734726758", "MasterCard 7158 30** **** 6758"),
@@ -23,7 +26,10 @@ def test_ask_account():
         ("Visa Platinum 8990922113665229", "Visa Platinum 8990 92** **** 5229"),
         ("Visa Gold 5999414228426353", "Visa Gold 5999 41** **** 6353"),
         ("Счет 73654108430135874305", "Счет **4305"),
-    ])
+    ],
+)
+
+
 def test_ask_account_card(x, expected):
     """Параметризованные тесты с разными типами карт и счетов
     для проверки универсальности функции."""
@@ -73,6 +79,7 @@ def test_get_date_acceptable_format(get_date_correct_format_list):
     for item in get_date_correct_format_list:
         assert get_date(item) == "11.03.2024"
 
+
 def test_get_date_unacceptable_format(get_date_incorrect_format_list):
     """Негативный тест функции на различных входных форматах даты, включая
     нестандартные строки с датами."""
@@ -96,7 +103,3 @@ def test_get_date_invalid_month(invalid_month_list):
         with pytest.raises(ValueError) as exc_info:
             get_date(item)
         assert str(exc_info.value) == "В году должно быть от 1 до 12 месяцев"
-
-
-
-
