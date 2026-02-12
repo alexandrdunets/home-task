@@ -1,4 +1,7 @@
-def get_mask_card_number(card_number: int | str) -> str:
+from typing import Optional
+
+
+def get_mask_card_number(card_number: Optional[int | str] = None) -> str:
     """Функция get_mask_card_number принимает на вход номер карты
     в виде числа и возвращает ее маску. Номер карты замаскирован
     и отображается в формате XXXX XX** **** XXXX,
@@ -9,18 +12,27 @@ def get_mask_card_number(card_number: int | str) -> str:
     7000792289606361     # входной аргумент
     7000 79** **** 6361  # выход функции"""
 
+    if not card_number:
+        raise ValueError("Номер карты отсутствует")
+
+    if not isinstance(card_number, int | str):
+        raise TypeError("Тип данных входного аргумента должен быть целым или строковым")
+
     mask_card_number = ""
     number_str = str(card_number)
 
-    if len(number_str) == 16 and number_str.isdigit():
-        mask_card_number = number_str[:4] + " " + number_str[4:6] + "** **** " + number_str[-4:]
-    else:
-        print("Номер карты должен содержать 16 цифр без пробелов!")
+    if not number_str.isdigit():
+        raise ValueError("Номер карты должен содержать только цифры")
+
+    if len(number_str) != 16:
+        raise ValueError("Номер карты должен содержать 16 цифр")
+
+    mask_card_number = number_str[:4] + " " + number_str[4:6] + "** **** " + number_str[-4:]
 
     return mask_card_number
 
 
-def get_mask_account(account_number: int | str) -> str:
+def get_mask_account(account_number: Optional[int | str] = None) -> str:
     """Функция get_mask_account принимает на вход номер счета в виде числа
     и возвращает его маску. Номер счета замаскирован и отображается
     в формате **XXXX, где X — это цифра номера. То есть видны
@@ -29,12 +41,20 @@ def get_mask_account(account_number: int | str) -> str:
     73654108430135874305  # входной аргумент
     **4305  # выход функции"""
 
+    if not account_number:
+        raise ValueError("Номер счета отсутствует")
+
+    if not isinstance(account_number, int | str):
+        raise TypeError("Тип данных входного аргумента должен быть целым или строковым")
+
     mask_account = ""
     account_str = str(account_number)
 
-    if len(account_str) == 20 and account_str.isdigit():
-        mask_account = "**" + account_str[-4:]
-    else:
-        print("Номер счета должен содержать 20 цифр без пробелов!")
+    if not account_str.isdigit():
+        raise ValueError("Номер счета должен содержать только цифры")
+    if len(account_str) != 20:
+        raise ValueError("Номер счета должен содержать 20 цифр")
+
+    mask_account = "**" + account_str[-4:]
 
     return mask_account
