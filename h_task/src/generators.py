@@ -54,7 +54,8 @@ def card_number_generator(
 ) -> Generator[str, None, None]:
     """Функция генерирует номера банковских карт в формате XXXX XXXX XXXX XXXX, где X — цифра номера карты.
     Генератор может сгенерировать номера карт в заданном диапазоне от 0000 0000 0000 0001 до 9999 9999 9999 9999.
-    Параметры: begin_card_number - начальный номер, end_card_number - конечный номер генерации."""
+    Параметры: begin_card_number - начальный номер, end_card_number - конечный номер генерации, они должны быть
+     целыми положительными числами."""
 
     if not isinstance(begin_card_number, int) or not isinstance(end_card_number, int):
         raise TypeError("Тип входного аргумента должен быть целым")
