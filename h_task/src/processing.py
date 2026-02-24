@@ -1,8 +1,8 @@
 import datetime
-from typing import Optional
+from typing import Optional, List
 
 
-def filter_by_state(list_dict: Optional[list[dict]] = None, state: str = "EXECUTED") -> list[dict]:
+def filter_by_state(list_dict: Optional[List[dict]] = None, state: str = "EXECUTED") -> List[dict]:
     """Функция принимает список словарей и опционально значение для ключа state (по умолчанию 'EXECUTED'),
     а возвращает новый список словарей, содержащий только те словари, у которых ключ state
     соответствует указанному значению."""
