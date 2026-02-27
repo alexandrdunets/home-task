@@ -57,9 +57,22 @@ print(get_date("2024-03-11T02:26:18.671407")) - ввод
     булевский аргумент is_descending  
 (is_descending=True (по умолчанию) - сортировка производится по убыванию,  
 is_descending=False - сортировка по возрастанию)
+#### *filter_by_currency(list_dict: Optional[List[Dict]] = None, currency_code: Optional[str] = None)*
+- функция находится в модуле src/generators.py
+- функция принимает на вход список словарей через параметр list_dict, представляющих транзакции и
+    возвращает итератор, который поочередно выдает транзакции,
+    где валюта операции соответствует заданной через параметр currency_code (например, USD).
+#### *transaction_descriptions(list_dict: Optional[List[Dict]] = None)*
+- функция находится в модуле src/generators.py
+- функция принимает список словарей с транзакциями и возвращает описание каждой операции по очереди.
+#### *card_number_generator(begin_card_number: Optional[int] = None, end_card_number: Optional[int] = None)*
+- Функция генерирует номера банковских карт в формате XXXX XXXX XXXX XXXX, где X — цифра номера карты.
+    Генератор может сгенерировать номера карт в заданном диапазоне от 0000 0000 0000 0001 до 9999 9999 9999 9999.
+    Параметры: begin_card_number - начальный номер, end_card_number - конечный номер генерации, они должны быть целыми положительными числами.
+
 ### Тестирование
 - тесты и фикстуры проверки работоспособности функций располагаются в 
-директории tests/ в соответствующих модулях conftest.py, test_mask.py, test_widget.py, test_processing.py
+директории tests/ в соответствующих модулях conftest.py, test_mask.py, test_widget.py, test_processing.py, test_generators_py
 - тестирование производится с помощью фреймворка pytest
 - устанавливается pytest командой терминала poetry add -group dev pytest
  
