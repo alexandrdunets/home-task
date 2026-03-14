@@ -145,3 +145,5 @@ if __name__ == "__main__":
         except StopIteration:
             print("Нет больше элементов в генераторе.")
             break
+
+
