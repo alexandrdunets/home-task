@@ -14,7 +14,7 @@ def log(filename: Optional[str] = None):
             try:
                 result = func(*args, **kwargs)
                 if filename:
-                    with open(filename, 'a', encoding='utf-8') as f:
+                    with open(filename, "a", encoding="utf-8") as f:
                         f.write(f"{func.__name__} ok\n")
                 else:
                     print(f"{func.__name__} ok")
@@ -22,7 +22,7 @@ def log(filename: Optional[str] = None):
 
             except Exception as e:
                 if filename:
-                    with open(filename, 'a', encoding='utf-8') as f:
+                    with open(filename, "a", encoding="utf-8") as f:
                         f.write(f"{func.__name__} error: {str(e)}. Inputs: {args}, {kwargs}\n")
                 else:
                     print(f"{func.__name__} error: {str(e)}. Inputs: {args}, {kwargs}")
@@ -31,4 +31,3 @@ def log(filename: Optional[str] = None):
         return wrapper
 
     return decorator
-

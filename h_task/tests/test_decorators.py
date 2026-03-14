@@ -2,7 +2,7 @@ import pytest
 from src.decorators import log
 
 
-@log() # Применяем декоратор log c указанием параметра
+@log()  # Применяем декоратор log c указанием параметра
 def div_to_consol(a, b):
     return a / b
 
@@ -29,6 +29,8 @@ def test_log_consol_err(capsys):
 
 
 log_file = "mylog.txt"
+
+
 @log(filename=log_file)  # Применяем декоратор log c указанием параметра
 def div_to_file(a, b):
     return a / b
@@ -39,11 +41,10 @@ def test_log_file():
 
     div_to_file(2, 1)
 
-    with open(log_file, 'r', encoding='utf-8') as f:
-        last_line = ""
+    with open(log_file, "r", encoding="utf-8") as f:
         for line in f:
             pass
-        last_line = line # Последняя строка в файле
+        last_line = line  # Последняя строка в файле
         assert last_line == "div_to_file ok\n"
 
 
@@ -53,10 +54,8 @@ def test_log_file_err():
     with pytest.raises(Exception):
         div_to_file(2, 0)
 
-    with open(log_file, 'r', encoding='utf-8') as f:
+    with open(log_file, "r", encoding="utf-8") as f:
         for line in f:
             pass
         last_line = line  # Последняя строка в файле
         assert last_line == "div_to_file error: division by zero. Inputs: (2, 0), {}\n"
-
-
