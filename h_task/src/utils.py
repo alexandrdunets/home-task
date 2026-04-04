@@ -8,14 +8,12 @@ def read_file_to_list(file_path: str) -> list[dict]:
     transactions = []
 
     try:
-        with open(file_path, "r") as f:
-            content = f.read()
+        with open(file_path, "r", encoding="utf-8") as f:
+            transactions = json.load(f)
 
-            if not content:
-                print("Данный файл пустой!")
-                return transactions
-            else:
-                transactions = json.load(f)
+        if not  transactions:
+            print("Данный файл пустой!")
+            return transactions
 
         if not isinstance(transactions, list):
             print("Данные по транзакциям должны быть оформлены в виде списка")
@@ -27,5 +25,11 @@ def read_file_to_list(file_path: str) -> list[dict]:
 
     return transactions
 
+def qwe(file_path):
+    with open(file_path, "r", encoding="utf-8") as f:
+        content = json.load(f)
 
-#print(read_file_to_list("../data/operations.json"))
+    return content
+
+
+print(read_file_to_list("../data/operations.json"))

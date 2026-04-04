@@ -4,7 +4,6 @@ import pytest
 
 from unittest.mock import mock_open, patch
 from src.utils import read_file_to_list
-#from tests.conftest import json_to_list_input_output
 
 
 def test_read_file_to_list(read_file_to_list_input_output):
