@@ -1,14 +1,14 @@
 import json
 
 
-def json_to_list(json_file_path: str) -> list[dict]:
+def read_file_to_list(file_path: str) -> list[dict]:
     """Функция принимает на вход путь до JSON-файла и возвращает список словарей с данными о финансовых транзакциях.
     Если файл пустой, содержит не список или не найден, функция возвращает пустой список."""
 
     transactions = []
 
     try:
-        with open(json_file_path, "r") as f:
+        with open(file_path, "r") as f:
             content = f.read()
 
             if not content:
@@ -26,3 +26,6 @@ def json_to_list(json_file_path: str) -> list[dict]:
         return transactions
 
     return transactions
+
+
+#print(read_file_to_list("../data/operations.json"))

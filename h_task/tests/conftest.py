@@ -469,7 +469,7 @@ def card_number_generator_output():
 
 
 @pytest.fixture
-def json_to_list_input_output():
+def read_file_to_list_input_output():
     return [
         {
             "id": 441945886,
