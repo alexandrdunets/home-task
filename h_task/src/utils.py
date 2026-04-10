@@ -1,5 +1,4 @@
 import json
-from xml.etree.ElementTree import indent
 
 
 def read_file_to_list(file_path: str) -> list[dict]:
@@ -12,7 +11,7 @@ def read_file_to_list(file_path: str) -> list[dict]:
         with open(file_path, "r", encoding="utf-8") as f:
             content = f.read()
 
-        if not  content:
+        if len(content) == 0:
             print("Данный файл пустой!")
             return transactions
         else:
@@ -35,8 +34,5 @@ def read_file_to_list(file_path: str) -> list[dict]:
         print("Ошибка декодирования JSON")
         return transactions
 
-
+    print("Считывание файла: успешно")
     return transactions
-
-
-print(read_file_to_list("../data/operations.json"))
