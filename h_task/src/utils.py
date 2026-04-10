@@ -1,4 +1,5 @@
 import json
+from xml.etree.ElementTree import indent
 
 
 def read_file_to_list(file_path: str) -> list[dict]:
@@ -9,27 +10,33 @@ def read_file_to_list(file_path: str) -> list[dict]:
 
     try:
         with open(file_path, "r", encoding="utf-8") as f:
-            transactions = json.load(f)
+            content = f.read()
 
-        if not  transactions:
+        if not  content:
             print("Данный файл пустой!")
             return transactions
+        else:
+            json_content = json.loads(content)
 
-        if not isinstance(transactions, list):
+        if not isinstance(json_content, list):
             print("Данные по транзакциям должны быть оформлены в виде списка")
             return transactions
+
+        if not json_content:
+            print("Список транзакций пуст!")
+            return transactions
+
+        transactions = json_content
 
     except FileNotFoundError:
         print("Файл не найден, проверьте правильность указанного пути.")
         return transactions
+    except json.JSONDecodeError as e:
+        print("Ошибка декодирования JSON")
+        return transactions
+
 
     return transactions
-
-def qwe(file_path):
-    with open(file_path, "r", encoding="utf-8") as f:
-        content = json.load(f)
-
-    return content
 
 
 print(read_file_to_list("../data/operations.json"))
