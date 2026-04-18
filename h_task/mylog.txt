@@ -6,3 +6,5 @@ div_to_file ok
 div_to_file error: division by zero. Inputs: (2, 0), {}
 div_to_file ok
 div_to_file error: division by zero. Inputs: (2, 0), {}
+div_to_file ok
+div_to_file error: division by zero. Inputs: (2, 0), {}
