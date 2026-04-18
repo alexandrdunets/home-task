@@ -1,0 +1,61 @@
+import pytest
+import requests
+
+from src.external_api import transaction_rub_amount, convert_to_rub
+
+
+def test_transaction_rub_amount_from_rub(transaction_rub):
+    """Тест на успешную обработку транзакции в рублях"""
+
+    assert transaction_rub_amount(transaction_rub) == 31957.58
+
+
+def test_transaction_rub_amount_wrong_type():
+    """Тест на некорректный тип входных данных"""
+
+    with pytest.raises(TypeError) as exc_info:
+        transaction_rub_amount(["a", "b", "c"])
+    assert str(exc_info.value) == "Тип входного аргумента должен быть словарем"
+
+
+def test_convert_to_rub_empty_input():
+    """Тест на пустой словарь по транзакции"""
+
+    with pytest.raises(ValueError) as exc_info:
+        transaction_rub_amount({})
+    assert str(exc_info.value) == "Отсутствует словарь со входными данными"
+
+
+def test_convert_to_rub_empty_currency(transaction_empty_currency):
+    """Тест на отсутствие информации по типу валюты"""
+
+    with pytest.raises(ValueError) as exc_info:
+        transaction_rub_amount(transaction_empty_currency)
+    assert str(exc_info.value) == "В словаре отсутствует информация по значению валюты"
+
+
+def test_convert_to_rub_empty_amount(transaction_empty_amount):
+    """Тест на отсутствие информации по сумме транзакции"""
+
+    with pytest.raises(ValueError) as exc_info:
+        transaction_rub_amount(transaction_empty_amount)
+    assert str(exc_info.value) == "В словаре отсутствует информация о сумме транзакции"
+
+
+def test_convert_to_rub_empty_date(transaction_empty_date):
+    """Тест на отсутствие информации по дате транзакции"""
+
+    with pytest.raises(ValueError) as exc_info:
+        transaction_rub_amount(transaction_empty_date)
+    assert str(exc_info.value) == "В словаре отсутствует информация о дате транзакции"
+
+
+def test_convert_to_rub_not_eur_or_usd(transaction_not_eur_or_usd, capsys):
+    """Тест на конвертации валюты, отличной от EUR или USD"""
+
+    result = transaction_rub_amount(transaction_not_eur_or_usd)
+    captured = capsys.readouterr()
+    assert captured.out == "Значение валюты не является 'EUR' или 'USD'\n"
+    assert result == None
+
+
