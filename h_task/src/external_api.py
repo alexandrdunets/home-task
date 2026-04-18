@@ -1,6 +1,9 @@
-import json
-from typing import Any
+import os
 import requests
+import json
+
+from typing import Any
+from dotenv import load_dotenv
 
 
 def transaction_rub_amount(transaction: dict) -> float | None | Any:
@@ -55,8 +58,13 @@ def convert_to_rub(currency_code: str, amount: float, date: str) -> float | None
         "to": "RUB"
     }
 
+    # Загрузка переменных из .env-файла
+    load_dotenv()
+    # Получение значения переменной API_KEY из .env-файла
+    api_key = os.getenv("API_KEY")
+
     headers = {
-        "apikey": "JQ72bAiIKsqp12JGcL6BLsySVZcA28LH"
+        "apikey": api_key
     }
 
     try:
