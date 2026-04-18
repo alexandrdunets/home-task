@@ -8,26 +8,28 @@ def transaction_rub_amount(transaction: dict) -> float | None | Any:
     Если транзакция была в USD или EUR, происходит обращение к внешнему API для получения текущего курса валют
     и конвертации суммы операции в рубли."""
 
-    if not transaction:
-        raise ValueError("Отсутствует словарь со входными данными")
-
     if not isinstance(transaction, dict):
         raise TypeError("Тип входного аргумента должен быть словарем")
+
+    if not transaction:
+        raise ValueError("Отсутствует словарь со входными данными")
 
     currency_code = transaction.get("operationAmount", {}).get("currency", {}).get("code")
 
     if not currency_code:
         raise ValueError("В словаре отсутствует информация по значению валюты")
 
-    amount = round(float(transaction.get("operationAmount", {}).get("amount")), 2)
+    amount = round(float(transaction.get("operationAmount", {}).get("amount", 0)), 2)
 
     if not amount:
         raise ValueError("В словаре отсутствует информация о сумме транзакции")
 
-    date = transaction.get("date")[:10]
+    date = transaction.get("date")
 
     if not date:
         raise ValueError("В словаре отсутствует информация о дате транзакции")
+
+    date = date[:10]
 
     if currency_code == "RUB":
         return amount
@@ -60,10 +62,10 @@ def convert_to_rub(currency_code: str, amount: float, date: str) -> float | None
     try:
         response = requests.get(url, params=payload, headers=headers)
         status_code = response.status_code
-        print(status_code)
+        print(f"status_code = {status_code}")
         response.raise_for_status()
         resp_dict = json.loads(response.text)
-        res = round(float(resp_dict.get("result")), 2)
+        res = round(float(resp_dict.get("result", 0)), 2)
         return res
     except requests.exceptions.ConnectionError:
         print("Ошибка подключения. Пожалуйста, проверьте ваше сетевое подключение.")
