@@ -614,3 +614,19 @@ def transaction_not_eur_or_usd():
         "from": "Maestro 1596837868705199",
         "to": "Счет 64686473678894779589"
     }
+
+
+@pytest.fixture
+def convert_to_rub_response():
+    return {
+        'success': True,
+        'query': {
+            'from': 'USD', 'to': 'RUB', 'amount': 1
+        },
+        'info': {
+            'timestamp': 1562198399, 'rate': 63.315897
+        },
+        'date': '2019-07-03',
+        'historical': True,
+        'result': 63.315897
+    }
