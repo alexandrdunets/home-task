@@ -7,7 +7,8 @@ from dotenv import load_dotenv
 
 
 def transaction_rub_amount(transaction: dict) -> float | None | Any:
-    """Функция принимает на вход транзакцию и возвращает сумму транзакции (amount) в рублях, тип данных — float.
+    """Функция принимает на вход транзакцию в виде словаря и возвращает сумму транзакции (amount) в рублях,
+    тип данных — float.
     Если транзакция была в USD или EUR, происходит обращение к внешнему API для получения текущего курса валют
     и конвертации суммы операции в рубли."""
 
@@ -38,17 +39,25 @@ def transaction_rub_amount(transaction: dict) -> float | None | Any:
         return amount
 
     if currency_code == "EUR" or currency_code == "USD":
-        return convert_to_rub(currency_code, amount, date)
+        result = convert_to_rub(currency_code, amount, date)
+        if result:
+            result = round(float(result.get("result")), 2)
+            return result
+        else:
+            return None
 
     print("Значение валюты не является 'EUR' или 'USD'")
     return None
 
 
-def convert_to_rub(currency_code: str, amount: float, date: str) -> float | None:
+def convert_to_rub(currency_code: str, amount: float, date: str) -> dict | None:
     """Функция выполняет обращение к внешнему API для получения текущего курса валют и конвертации
     суммы операции в рубли. Для конвертации валюты используется Exchange Rates Data API:
-    https://apilayer.com/exchangerates_data-api."""
+    https://apilayer.com/exchangerates_data-api.
+        В качестве входных аргументов используются currency_code (тип валюты), amount (сумма) и
+    date (дата транзакции). Функция возвращает словарь с результатом конвертации валюты."""
 
+    global response
     url = "https://api.apilayer.com/exchangerates_data/convert"
 
     payload = {
@@ -72,33 +81,14 @@ def convert_to_rub(currency_code: str, amount: float, date: str) -> float | None
         status_code = response.status_code
         print(f"status_code = {status_code}")
         response.raise_for_status()
-        resp_dict = json.loads(response.text)
-        res = round(float(resp_dict.get("result", 0)), 2)
-        return res
+        # Вызываем метод json у объекта response, который возвращает ответ от API в виде словаря.
+        return response.json()
     except requests.exceptions.ConnectionError:
         print("Ошибка подключения. Пожалуйста, проверьте ваше сетевое подключение.")
+        return {}
     except requests.exceptions.HTTPError:
         print("Ошибка HTTP. Пожалуйста, проверьте URL.")
+        return {}
     except requests.exceptions.RequestException:
         print("Произошла ошибка. Пожалуйста, повторите попытку позже.")
-
-
-
-
-# print(convert_to_rub("USD", 1, "2000-08-26"))
-# print(convert_to_rub("EUR", 1, "2000-08-26"))
-print(transaction_rub_amount({
-    "id": 41428829,
-    "state": "EXECUTED",
-    "date": "2019-07-03T18:35:29.512364",
-    "operationAmount": {
-      "amount": "8221.37",
-      "currency": {
-        "name": "USD",
-        "code": "USD"
-      }
-    },
-    "description": "Перевод организации",
-    "from": "MasterCard 7158300734726758",
-    "to": "Счет 35383033474447895560"
-  }))
+        return {}
