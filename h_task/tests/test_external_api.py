@@ -60,7 +60,7 @@ def test_convert_to_rub_not_eur_or_usd(transaction_not_eur_or_usd, capsys):
     assert result == None
 
 
-@patch('requests.get')
+@patch("requests.get")
 def test_convert_to_rub(mock_get, convert_to_rub_response):
     """Тест, имитирующий запрос на API"""
 

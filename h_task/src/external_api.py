@@ -60,21 +60,14 @@ def convert_to_rub(currency_code: str, amount: float, date: str) -> dict | None:
     global response
     url = "https://api.apilayer.com/exchangerates_data/convert"
 
-    payload = {
-        "date": date,
-        "amount": amount,
-        "from": currency_code,
-        "to": "RUB"
-    }
+    payload = {"date": date, "amount": amount, "from": currency_code, "to": "RUB"}
 
     # Загрузка переменных из .env-файла
     load_dotenv()
     # Получение значения переменной API_KEY из .env-файла
     api_key = os.getenv("API_KEY")
 
-    headers = {
-        "apikey": api_key
-    }
+    headers = {"apikey": api_key}
 
     try:
         response = requests.get(url, params=payload, headers=headers)

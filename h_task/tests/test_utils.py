@@ -10,7 +10,7 @@ def test_read_file_to_list(capsys, read_file_to_list_input_output):
     content = json.dumps(read_file_to_list_input_output)
     mock_file = mock_open(read_data=content)
 
-    with patch('builtins.open', mock_file):
+    with patch("builtins.open", mock_file):
         result = read_file_to_list("operations.json")
 
     captured = capsys.readouterr()
@@ -23,7 +23,7 @@ def test_read_file_to_list_empty_file(capsys):
 
     mock_file = mock_open(read_data=None)
 
-    with patch('builtins.open', mock_file):
+    with patch("builtins.open", mock_file):
         result = read_file_to_list("operations.json")
 
     captured = capsys.readouterr()
@@ -37,7 +37,7 @@ def test_read_file_to_list_not_list(capsys):
     content = json.dumps({"a": 1})
     mock_file = mock_open(read_data=content)
 
-    with patch('builtins.open', mock_file):
+    with patch("builtins.open", mock_file):
         result = read_file_to_list("operations.json")
 
     captured = capsys.readouterr()
@@ -51,7 +51,7 @@ def test_read_file_to_list_empty_list(capsys):
     content = json.dumps([])
     mock_file = mock_open(read_data=content)
 
-    with patch('builtins.open', mock_file):
+    with patch("builtins.open", mock_file):
         result = read_file_to_list("operations.json")
 
     captured = capsys.readouterr()
@@ -73,7 +73,7 @@ def test_read_file_to_list_wrong_json(capsys):
 
     mock_file = mock_open(read_data='[{"Invalid":}]')
 
-    with patch('builtins.open', mock_file):
+    with patch("builtins.open", mock_file):
         result = read_file_to_list("operations.json")
 
     captured = capsys.readouterr()

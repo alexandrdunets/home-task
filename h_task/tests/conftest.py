@@ -475,16 +475,10 @@ def read_file_to_list_input_output():
             "id": 441945886,
             "state": "EXECUTED",
             "date": "2019-08-26T10:50:58.294041",
-            "operationAmount": {
-                "amount": "31957.58",
-                "currency": {
-                    "name": "руб.",
-                    "code": "RUB"
-                }
-            },
+            "operationAmount": {"amount": "31957.58", "currency": {"name": "руб.", "code": "RUB"}},
             "description": "Перевод организации",
             "from": "Maestro 1596837868705199",
-            "to": "Счет 64686473678894779589"
+            "to": "Счет 64686473678894779589",
         },
     ]
 
@@ -495,16 +489,10 @@ def transaction_rub():
         "id": 441945886,
         "state": "EXECUTED",
         "date": "2019-08-26T10:50:58.294041",
-        "operationAmount": {
-            "amount": "31957.58",
-            "currency": {
-                "name": "руб.",
-                "code": "RUB"
-            }
-        },
+        "operationAmount": {"amount": "31957.58", "currency": {"name": "руб.", "code": "RUB"}},
         "description": "Перевод организации",
         "from": "Maestro 1596837868705199",
-        "to": "Счет 64686473678894779589"
+        "to": "Счет 64686473678894779589",
     }
 
 
@@ -514,16 +502,10 @@ def transaction_usd():
         "id": 441945886,
         "state": "EXECUTED",
         "date": "2019-08-26T10:50:58.294041",
-        "operationAmount": {
-            "amount": "31957.58",
-            "currency": {
-                "name": "USD",
-                "code": "USD"
-            }
-        },
+        "operationAmount": {"amount": "31957.58", "currency": {"name": "USD", "code": "USD"}},
         "description": "Перевод организации",
         "from": "Maestro 1596837868705199",
-        "to": "Счет 64686473678894779589"
+        "to": "Счет 64686473678894779589",
     }
 
 
@@ -533,16 +515,10 @@ def transaction_eur():
         "id": 441945886,
         "state": "EXECUTED",
         "date": "2019-08-26T10:50:58.294041",
-        "operationAmount": {
-            "amount": "31957.58",
-            "currency": {
-                "name": "EUR",
-                "code": "EUR"
-            }
-        },
+        "operationAmount": {"amount": "31957.58", "currency": {"name": "EUR", "code": "EUR"}},
         "description": "Перевод организации",
         "from": "Maestro 1596837868705199",
-        "to": "Счет 64686473678894779589"
+        "to": "Счет 64686473678894779589",
     }
 
 
@@ -557,7 +533,7 @@ def transaction_empty_currency():
         },
         "description": "Перевод организации",
         "from": "Maestro 1596837868705199",
-        "to": "Счет 64686473678894779589"
+        "to": "Счет 64686473678894779589",
     }
 
 
@@ -567,15 +543,10 @@ def transaction_empty_amount():
         "id": 441945886,
         "state": "EXECUTED",
         "date": "2019-08-26T10:50:58.294041",
-        "operationAmount": {
-            "currency": {
-                "name": "руб.",
-                "code": "RUB"
-            }
-        },
+        "operationAmount": {"currency": {"name": "руб.", "code": "RUB"}},
         "description": "Перевод организации",
         "from": "Maestro 1596837868705199",
-        "to": "Счет 64686473678894779589"
+        "to": "Счет 64686473678894779589",
     }
 
 
@@ -584,16 +555,10 @@ def transaction_empty_date():
     return {
         "id": 441945886,
         "state": "EXECUTED",
-        "operationAmount": {
-            "amount": "31957.58",
-            "currency": {
-                "name": "EUR",
-                "code": "EUR"
-            }
-        },
+        "operationAmount": {"amount": "31957.58", "currency": {"name": "EUR", "code": "EUR"}},
         "description": "Перевод организации",
         "from": "Maestro 1596837868705199",
-        "to": "Счет 64686473678894779589"
+        "to": "Счет 64686473678894779589",
     }
 
 
@@ -603,30 +568,20 @@ def transaction_not_eur_or_usd():
         "id": 441945886,
         "state": "EXECUTED",
         "date": "2019-08-26T10:50:58.294041",
-        "operationAmount": {
-            "amount": "31957.58",
-            "currency": {
-                "name": "GBP",
-                "code": "GBP"
-            }
-        },
+        "operationAmount": {"amount": "31957.58", "currency": {"name": "GBP", "code": "GBP"}},
         "description": "Перевод организации",
         "from": "Maestro 1596837868705199",
-        "to": "Счет 64686473678894779589"
+        "to": "Счет 64686473678894779589",
     }
 
 
 @pytest.fixture
 def convert_to_rub_response():
     return {
-        'success': True,
-        'query': {
-            'from': 'USD', 'to': 'RUB', 'amount': 1
-        },
-        'info': {
-            'timestamp': 1562198399, 'rate': 63.315897
-        },
-        'date': '2019-07-03',
-        'historical': True,
-        'result': 63.315897
+        "success": True,
+        "query": {"from": "USD", "to": "RUB", "amount": 1},
+        "info": {"timestamp": 1562198399, "rate": 63.315897},
+        "date": "2019-07-03",
+        "historical": True,
+        "result": 63.315897,
     }
