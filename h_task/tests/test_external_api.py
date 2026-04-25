@@ -1,4 +1,5 @@
 import pytest
+from unittest.mock import patch, Mock
 import requests
 
 from src.external_api import transaction_rub_amount, convert_to_rub
@@ -51,7 +52,7 @@ def test_convert_to_rub_empty_date(transaction_empty_date):
 
 
 def test_convert_to_rub_not_eur_or_usd(transaction_not_eur_or_usd, capsys):
-    """Тест на конвертации валюты, отличной от EUR или USD"""
+    """Тест на конвертацию валюты, отличной от EUR или USD"""
 
     result = transaction_rub_amount(transaction_not_eur_or_usd)
     captured = capsys.readouterr()
@@ -59,3 +60,9 @@ def test_convert_to_rub_not_eur_or_usd(transaction_not_eur_or_usd, capsys):
     assert result == None
 
 
+@patch('requests.get')
+def test_convert_to_rub(mock_get, convert_to_rub_response):
+    """Тест, имитирующий запрос на API"""
+
+    mock_get.return_value.json.return_value = convert_to_rub_response
+    assert convert_to_rub("USD", 1, "2019-07-03") == convert_to_rub_response
