@@ -1,6 +1,5 @@
 import os
 import requests
-import json
 
 from typing import Any
 from dotenv import load_dotenv

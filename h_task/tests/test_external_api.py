@@ -1,6 +1,5 @@
 import pytest
-from unittest.mock import patch, Mock
-import requests
+from unittest.mock import patch
 
 from src.external_api import transaction_rub_amount, convert_to_rub
 
@@ -57,7 +56,7 @@ def test_convert_to_rub_not_eur_or_usd(transaction_not_eur_or_usd, capsys):
     result = transaction_rub_amount(transaction_not_eur_or_usd)
     captured = capsys.readouterr()
     assert captured.out == "Значение валюты не является 'EUR' или 'USD'\n"
-    assert result == None
+    assert result is None
 
 
 @patch("requests.get")

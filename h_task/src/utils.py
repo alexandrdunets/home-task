@@ -30,7 +30,7 @@ def read_file_to_list(file_path: str) -> list[dict]:
     except FileNotFoundError:
         print("Файл не найден, проверьте правильность указанного пути.")
         return transactions
-    except json.JSONDecodeError as e:
+    except json.JSONDecodeError:
         print("Ошибка декодирования JSON")
         return transactions
 
