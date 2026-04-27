@@ -66,12 +66,3 @@ def test_convert_to_rub(mock_get, convert_to_rub_response):
     mock_get.status_code = 200
     mock_get.return_value.json.return_value = convert_to_rub_response
     assert convert_to_rub("USD", 1, "2019-07-03") == convert_to_rub_response
-
-
-# @patch("requests.get")
-# def test_convert_to_rub_exception(mock_get):
-#     """Тест, имитирующий запрос на API"""
-#
-#     mock_get.status_code = 500
-#     with pytest.raises(HTTPError) as exc_info:
-#         convert_to_rub("USD", 1, "2019-07-03")

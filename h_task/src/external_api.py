@@ -56,8 +56,7 @@ def convert_to_rub(currency_code: str, amount: float, date: str) -> dict | None:
         В качестве входных аргументов используются currency_code (тип валюты), amount (сумма) и
     date (дата транзакции). Функция возвращает словарь с результатом конвертации валюты."""
 
-    result = {}
-
+    global result
     url = "https://api.apilayer.com/exchangerates_data/convert"
     payload = {"date": date, "amount": amount, "from": currency_code, "to": "RUB"}
 
@@ -69,12 +68,15 @@ def convert_to_rub(currency_code: str, amount: float, date: str) -> dict | None:
     headers = {"apikey": api_key}
 
     try:
+        result = {}
         response = requests.get(url, params=payload, headers=headers)
         status_code = response.status_code
         print(f"status_code = {status_code}")
+
         if status_code == 200:
             # Вызываем метод json у объекта response, который возвращает ответ от API в виде словаря.
             result = response.json()
+
         response.raise_for_status()
     except requests.exceptions.ConnectionError:
         print("Ошибка подключения. Пожалуйста, проверьте ваше сетевое подключение.")
