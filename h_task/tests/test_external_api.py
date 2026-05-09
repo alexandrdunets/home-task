@@ -1,7 +1,8 @@
-import pytest
 from unittest.mock import patch
 
-from src.external_api import transaction_rub_amount, convert_to_rub
+import pytest
+
+from src.external_api import convert_to_rub, transaction_rub_amount
 
 
 def test_transaction_rub_amount_from_rub(transaction_rub):

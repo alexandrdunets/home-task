@@ -1,6 +1,6 @@
+from src.generators import card_number_generator, filter_by_currency, transaction_descriptions
 from src.processing import filter_by_state, sort_by_date
 from src.widget import ask_account_card, get_date
-from src.generators import transaction_descriptions, card_number_generator, filter_by_currency
 
 transactions_1 = [
     {
