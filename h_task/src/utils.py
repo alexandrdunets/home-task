@@ -8,7 +8,7 @@ logging.basicConfig(
     filemode="w"
 )
 file_handler = logging.FileHandler(
-    filename="../logs/utils.log", encoding="utf-8"
+    filename="../h_task/logs/utils.log", encoding="utf-8"
 )
 file_formatter = logging.Formatter(
     "%(asctime)s %(name)s: %(levelname)s %(message)s"
